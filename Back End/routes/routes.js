@@ -9,8 +9,8 @@ router.route('/user/forgot/verify').post(userController.forgotVerify);
 router.route('/user/forgot/reset').patch(userController.resetPassword);
 router.route('/user/register').post(userController.register);
 router.route("/user/todo").patch(userController.addTodo);
-router.route("/user/todoEdit").patch(userController.editTodo);
-
+router.route("/user/todoEdit").put(userController.editTodo);
+router.route("/user/tododelete").patch(userController.deleteTodo);
 
 
 

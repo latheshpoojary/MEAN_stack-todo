@@ -29,7 +29,7 @@ var userSchema = new Schema({
         required:false,
       },
       target_date:{
-        type:Date,
+        type:String,
         required:false,
       },
       status:{

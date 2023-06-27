@@ -1,4 +1,5 @@
 var userService = require("../user/userService");
+const userModel = require("./userModel");
 var loginUser = async (req, res) => {
   let result = null;
   try {
@@ -47,10 +48,25 @@ const addTodo = async (req, res) => {
   }
 };
 
+var editTodo = async (req, res) => {
+  
+    try {
+      const result = await userService.editTodo(req.body);
+      if(result.status){
+        res.send({status:true,msg:"success"});
+      }
+      else{
+        res.send({status:false,msg:"failed"});
+      }
+    } catch (error) {
+      res.send({ status: false, msg: "failed" });
+    }
+  }
 
- var editTodo = async(req,res)=>{
+
+const deleteTodo = async(req,res)=>{
   try {
-    const result = userService.editTodo(req.body);
+    const result = await userService.deleteTodo(req.body);
     if(result.status){
       res.send({status:true,msg:"success"});
     }
@@ -60,14 +76,13 @@ const addTodo = async (req, res) => {
   } catch (error) {
     res.send({ status: false, msg: "failed" });
   }
- }
+}
 
 
 var getAllTodo = async (req, res) => {
   try {
     const result = await userService.getTodo(req.body);
-    
-    
+
     if (result) {
       res.send({ status: true, msg: result.msg });
     }
@@ -75,8 +90,6 @@ var getAllTodo = async (req, res) => {
     res.send({ status: false, data: null });
   }
 };
-
-
 
 var forgotVerify = async (req, res) => {
   let result = null;
@@ -126,4 +139,5 @@ module.exports = {
   register,
   addTodo,
   getAllTodo,
+  deleteTodo
 };
